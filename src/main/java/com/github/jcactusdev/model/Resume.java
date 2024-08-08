@@ -7,13 +7,20 @@ public class Resume implements Comparable<Resume> {
 
     // Unique identifier
     private String uuid;
+    private String fullName;
 
     public Resume() {
-        uuid = UUID.randomUUID().toString();
     }
 
-    public Resume(String uuid) {
+    public Resume(String fullName) {
+        this(UUID.randomUUID().toString(), fullName);
+    }
+
+    public Resume(String uuid, String fullName) {
+        Objects.requireNonNull(uuid, "uuid must not be null");
+        Objects.requireNonNull(fullName, "fullName must not be null");
         this.uuid = uuid;
+        this.fullName = fullName;
     }
 
     public String getUUID() {
@@ -24,14 +31,23 @@ public class Resume implements Comparable<Resume> {
         this.uuid = uuid;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     @Override
     public String toString() {
-        return String.format("Resume [uuid=%s]", uuid);
+        return String.format("Resume [uuid=%s, fullName=%s]", uuid, fullName);
     }
 
     @Override
     public int hashCode() {
-        return 31 * ((uuid == null) ? 0 : uuid.hashCode());
+        return 11 * ((uuid == null) ? 0 : uuid.hashCode())
+                + 20 * ((fullName == null) ? 0 : fullName.hashCode());
     }
 
     @Override
@@ -51,7 +67,8 @@ public class Resume implements Comparable<Resume> {
         // Приведение otherObject к типу текущего класа
         Resume other = (Resume) otherObject;
         // Проверка хранимых значений в свойствах объекта
-        return Objects.equals(this.uuid, other.uuid);
+        return Objects.equals(this.uuid, other.uuid)
+                && Objects.equals(this.fullName, other.fullName);
     }
 
     @Override
@@ -63,12 +80,13 @@ public class Resume implements Comparable<Resume> {
             cloneObject = new Resume();
         }
         cloneObject.uuid = uuid;
+        cloneObject.fullName = fullName;
         return cloneObject;
     }
 
     @Override
     public int compareTo(Resume o) {
-        return uuid.compareTo(o.uuid);
+        int cmp = fullName.compareTo(o.fullName);
+        return cmp != 0 ? cmp : uuid.compareTo(o.uuid);
     }
-
 }

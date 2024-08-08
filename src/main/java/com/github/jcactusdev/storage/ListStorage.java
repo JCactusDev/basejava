@@ -9,10 +9,6 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     private final List<Resume> storage = new ArrayList<>();
 
-    public Resume[] getAll() {
-        return storage.toArray(new Resume[storage.size()]);
-    }
-
     @Override
     public void clear() {
         storage.clear();
@@ -25,7 +21,14 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     public String toString() {
-        return storage.toString();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < storage.size(); i++) {
+            stringBuilder.append(String.format("id: %d, Resume: %s", i, storage.get(i).toString()));
+            if (i < storage.size() - 1) {
+                stringBuilder.append("\n");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     @Override
@@ -53,6 +56,11 @@ public class ListStorage extends AbstractStorage<Integer> {
             throw new IllegalArgumentException();
         }
         return storage.get(key);
+    }
+
+    @Override
+    protected List<Resume> doGetAll() {
+        return new ArrayList<>(storage);
     }
 
     @Override

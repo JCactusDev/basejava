@@ -17,7 +17,7 @@ public class ArrayStorage extends AbstractArrayStorage {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            stringBuilder.append(String.format("id: %d, UUID: %s", i, storage[i].getUUID()));
+            stringBuilder.append(String.format("id: %d, Resume: %s", i, storage[i].toString()));
             if (i < size - 1) {
                 stringBuilder.append("\n");
             }

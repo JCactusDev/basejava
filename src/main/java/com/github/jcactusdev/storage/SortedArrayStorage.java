@@ -29,7 +29,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < size; i++) {
-            stringBuilder.append(String.format("id: %d, UUID: %s", i, storage[i].getUUID()));
+            stringBuilder.append(String.format("id: %d, Resume: %s", i, storage[i].toString()));
             if (i < size - 1) {
                 stringBuilder.append("\n");
             }
@@ -39,8 +39,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected Integer getKey(String uuid) {
-        Resume object = new Resume();
-        object.setUUID(uuid);
-        return Arrays.binarySearch(storage, 0, size, object);
+        Resume object = new Resume(uuid, "dummy");
+        return Arrays.binarySearch(storage, 0, size, object, RESUME_COMPARATOR);
     }
 }

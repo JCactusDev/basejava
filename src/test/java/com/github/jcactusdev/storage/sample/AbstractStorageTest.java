@@ -1,13 +1,17 @@
-package com.github.jcactusdev.storage;
+package com.github.jcactusdev.storage.sample;
 
 import com.github.jcactusdev.model.Resume;
+import com.github.jcactusdev.storage.Storage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 public abstract class AbstractStorageTest {
 
-    private Storage storage;
+    protected Storage storage;
 
     private static final String UUID_1 = "uuid1";
     private static final String UUID_2 = "uuid2";
@@ -15,11 +19,11 @@ public abstract class AbstractStorageTest {
     private static final String UUID_4 = "uuid4";
     private static final String UUID_5 = "uuid5";
 
-    private static final Resume R1 = new Resume(UUID_1);
-    private static final Resume R2 = new Resume(UUID_2);
-    private static final Resume R3 = new Resume(UUID_3);
-    private static final Resume R4 = new Resume(UUID_4);
-    private static final Resume R5 = new Resume(UUID_5);
+    private static final Resume R1 = new Resume(UUID_1, "Name1");
+    private static final Resume R2 = new Resume(UUID_2, "Name2");
+    private static final Resume R3 = new Resume(UUID_3, "Name3");
+    private static final Resume R4 = new Resume(UUID_4, "Name4");
+    private static final Resume R5 = new Resume(UUID_5, "Name5");
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -46,27 +50,15 @@ public abstract class AbstractStorageTest {
         storage.save(R5);
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
-    public void save_Stack() throws Exception {
-        try {
-            for (int i = 3; i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume(String.format("uuid_%d", i)));
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            Assert.fail();
-        }
-        storage.save(new Resume(String.format("uuid_%d", AbstractArrayStorage.STORAGE_LIMIT + 1)));
-    }
-
     public void get() throws Exception {
         Assert.assertEquals(R1, storage.get(UUID_1));
     }
 
     @Test
-    public void getAll() throws Exception {
-        Resume[] array = (Resume[]) storage.getAll();
-
-        Assert.assertEquals(3, array.length);
+    public void getAllSorted() throws Exception {
+        List<Resume> list = storage.getAllSorted();
+        Assert.assertEquals(3, list.size());
+        Assert.assertEquals(list, Arrays.asList(R1, R2, R3));
     }
 
     public void update() throws Exception {

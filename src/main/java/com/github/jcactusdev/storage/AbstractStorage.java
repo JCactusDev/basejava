@@ -2,6 +2,10 @@ package com.github.jcactusdev.storage;
 
 import com.github.jcactusdev.model.Resume;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 public abstract class AbstractStorage<K> implements Storage {
 
     @Override
@@ -19,6 +23,13 @@ public abstract class AbstractStorage<K> implements Storage {
             throw new NullPointerException();
         }
         return doGet(uuid);
+    }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> result = doGetAll();
+        Collections.sort(result);
+        return result;
     }
 
     @Override
@@ -51,6 +62,8 @@ public abstract class AbstractStorage<K> implements Storage {
     protected abstract void doSave(Resume object, K key);
 
     protected abstract Resume doGet(String uuid);
+
+    protected abstract List<Resume> doGetAll();
 
     protected abstract void doUpdate(Resume object, K key);
 

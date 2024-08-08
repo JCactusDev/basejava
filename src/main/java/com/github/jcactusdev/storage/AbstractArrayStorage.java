@@ -3,16 +3,13 @@ package com.github.jcactusdev.storage;
 import com.github.jcactusdev.model.Resume;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
-    protected static final int STORAGE_LIMIT = 10000;
+    public static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
-
-    public Resume[] getAll() {
-        return Arrays.copyOf(storage, size);
-    }
 
     @Override
     public void clear() {
@@ -31,7 +28,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
             throw new IllegalArgumentException();
         }
         if (size + 1 > STORAGE_LIMIT) {
-            //System.out.println("Storage limit exceeded");
             throw new ArrayIndexOutOfBoundsException("Resume limit exceeded");
         }
         insertElement(object, key);
@@ -45,6 +41,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
             throw new IllegalArgumentException();
         }
         return storage[key];
+    }
+
+    @Override
+    protected List<Resume> doGetAll() {
+        return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
     @Override
