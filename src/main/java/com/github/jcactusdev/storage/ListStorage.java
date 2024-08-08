@@ -40,7 +40,7 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doSave(Resume object, Integer key) {
-        if(key >= 0){
+        if (key >= 0) {
             throw new IllegalArgumentException();
         }
         storage.add(object);

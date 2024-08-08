@@ -30,16 +30,16 @@ public class Main {
         storage.save(resume2);
         storage.save(resume1);
         System.out.println(storage.toString());
-        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size()==Arrays.stream(storage.getAll()).count()));
+        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size() == Arrays.stream(storage.getAll()).count()));
 
         System.out.println("delete \"UUID_2\":");
         storage.delete("UUID_2");
         System.out.println(storage.toString());
-        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size()==Arrays.stream(storage.getAll()).count()));
+        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size() == Arrays.stream(storage.getAll()).count()));
 
         System.out.println("clear:");
         storage.clear();
-        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size()==Arrays.stream(storage.getAll()).count()));
+        System.out.println("Total size: " + storage.size() + ", size() == getAll(): " + (storage.size() == Arrays.stream(storage.getAll()).count()));
 
         System.out.println("============================================");
 
@@ -48,16 +48,16 @@ public class Main {
         sort_storage.save(resume2);
         sort_storage.save(resume1);
         System.out.println(sort_storage.toString());
-        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size()==Arrays.stream(sort_storage.getAll()).count()));
+        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size() == Arrays.stream(sort_storage.getAll()).count()));
 
         System.out.println("delete \"UUID_2\":");
         sort_storage.delete("UUID_2");
         System.out.println(sort_storage.toString());
-        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size()==Arrays.stream(sort_storage.getAll()).count()));
+        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size() == Arrays.stream(sort_storage.getAll()).count()));
 
         System.out.println("clear:");
         sort_storage.clear();
-        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size()==Arrays.stream(sort_storage.getAll()).count()));
+        System.out.println("Total size: " + sort_storage.size() + ", size() == getAll(): " + (sort_storage.size() == Arrays.stream(sort_storage.getAll()).count()));
 
         System.out.println("============================================");
 
@@ -66,16 +66,16 @@ public class Main {
         list_storage.save(resume2);
         list_storage.save(resume1);
         System.out.println(list_storage.toString());
-        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size()==Arrays.stream(list_storage.getAll()).count()));
+        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size() == Arrays.stream(list_storage.getAll()).count()));
 
         System.out.println("delete \"UUID_2\":");
         list_storage.delete("UUID_2");
         System.out.println(list_storage.toString());
-        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size()==Arrays.stream(list_storage.getAll()).count()));
+        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size() == Arrays.stream(list_storage.getAll()).count()));
 
         System.out.println("clear:");
         list_storage.clear();
-        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size()==Arrays.stream(list_storage.getAll()).count()));
+        System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size() == Arrays.stream(list_storage.getAll()).count()));
 
         System.out.println("============================================");
 
@@ -84,16 +84,16 @@ public class Main {
         map_storage.save(resume2);
         map_storage.save(resume1);
         System.out.println(map_storage.toString());
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size()==Arrays.stream(map_storage.getAll()).count()));
+        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == Arrays.stream(map_storage.getAll()).count()));
 
         System.out.println("delete \"UUID_2\":");
         map_storage.delete("UUID_2");
         System.out.println(map_storage.toString());
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size()==Arrays.stream(map_storage.getAll()).count()));
+        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == Arrays.stream(map_storage.getAll()).count()));
 
         System.out.println("clear:");
         map_storage.clear();
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size()==Arrays.stream(map_storage.getAll()).count()));
+        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == Arrays.stream(map_storage.getAll()).count()));
 
         System.out.println("============================================");
     }

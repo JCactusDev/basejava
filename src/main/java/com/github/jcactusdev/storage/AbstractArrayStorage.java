@@ -10,7 +10,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
     protected int size = 0;
 
-    public Resume[] getAll(){
+    public Resume[] getAll() {
         return Arrays.copyOf(storage, size);
     }
 
