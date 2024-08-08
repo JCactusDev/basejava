@@ -22,7 +22,8 @@ public abstract class AbstractStorage<K> implements Storage {
         if (uuid == null) {
             throw new NullPointerException();
         }
-        return doGet(uuid);
+        K key = getKey(uuid);
+        return doGet(key);
     }
 
     @Override
@@ -46,7 +47,8 @@ public abstract class AbstractStorage<K> implements Storage {
         if (uuid == null) {
             throw new NullPointerException();
         }
-        doDelete(uuid);
+        K key = getKey(uuid);
+        doDelete(key);
     }
 
     @Override
@@ -61,12 +63,12 @@ public abstract class AbstractStorage<K> implements Storage {
 
     protected abstract void doSave(Resume object, K key);
 
-    protected abstract Resume doGet(String uuid);
+    protected abstract Resume doGet(K key);
 
     protected abstract List<Resume> doGetAll();
 
     protected abstract void doUpdate(Resume object, K key);
 
-    protected abstract void doDelete(String uuid);
+    protected abstract void doDelete(K key);
 
 }

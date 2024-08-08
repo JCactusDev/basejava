@@ -45,8 +45,8 @@ public class MapWithKeyResumeStorage extends AbstractStorage<Resume> {
     }
 
     @Override
-    protected Resume doGet(String key) {
-        return storage.get(key);
+    protected Resume doGet(Resume key) {
+        return key;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class MapWithKeyResumeStorage extends AbstractStorage<Resume> {
     }
 
     @Override
-    protected void doDelete(String key) {
-        storage.remove(key);
+    protected void doDelete(Resume key) {
+        storage.remove(key.getUUID());
     }
 }

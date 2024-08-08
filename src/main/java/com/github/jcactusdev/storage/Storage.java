@@ -9,8 +9,6 @@ public interface Storage {
 
     Resume get(String uuid);
 
-    //[] getAll();
-
     List<Resume> getAllSorted();
 
     void update(Resume object);

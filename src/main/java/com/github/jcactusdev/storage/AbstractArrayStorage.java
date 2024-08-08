@@ -35,8 +35,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        Integer key = getKey(uuid);
+    protected Resume doGet(Integer key) {
         if (key < 0) {
             throw new IllegalArgumentException();
         }
@@ -57,8 +56,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        Integer key = getKey(uuid);
+    protected void doDelete(Integer key) {
         if (key < 0) {
             throw new IllegalArgumentException();
         }

@@ -50,8 +50,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected Resume doGet(String uuid) {
-        int key = getKey(uuid);
+    protected Resume doGet(Integer key) {
         if (key < 0) {
             throw new IllegalArgumentException();
         }
@@ -69,8 +68,7 @@ public class ListStorage extends AbstractStorage<Integer> {
     }
 
     @Override
-    protected void doDelete(String uuid) {
-        Integer key = getKey(uuid);
+    protected void doDelete(Integer key) {
         if (key < 0) {
             throw new IllegalArgumentException();
         }
