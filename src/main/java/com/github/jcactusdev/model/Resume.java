@@ -1,5 +1,7 @@
 package com.github.jcactusdev.model;
 
+import java.util.EnumMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -8,6 +10,9 @@ public class Resume implements Comparable<Resume> {
     // Unique identifier
     private String uuid;
     private String fullName;
+
+    private final Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume() {
     }
@@ -39,6 +44,14 @@ public class Resume implements Comparable<Resume> {
         this.fullName = fullName;
     }
 
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public Section getSection(SectionType type) {
+        return sections.get(type);
+    }
+
     @Override
     public String toString() {
         return String.format("Resume [uuid=%s, fullName=%s]", uuid, fullName);
@@ -46,8 +59,8 @@ public class Resume implements Comparable<Resume> {
 
     @Override
     public int hashCode() {
-        return 11 * ((uuid == null) ? 0 : uuid.hashCode())
-                + 20 * ((fullName == null) ? 0 : fullName.hashCode());
+        return 31 * ((uuid == null) ? 0 : uuid.hashCode())
+                + 31 * ((fullName == null) ? 0 : fullName.hashCode());
     }
 
     @Override
