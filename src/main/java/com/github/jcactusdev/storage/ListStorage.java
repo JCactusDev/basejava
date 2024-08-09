@@ -38,12 +38,12 @@ public class ListStorage extends AbstractStorage<Integer> {
                 return i;
             }
         }
-        return -1;
+        return null;
     }
 
     @Override
     protected void doSave(Resume object, Integer key) {
-        if (key >= 0) {
+        if (key != null) {
             throw new IllegalArgumentException();
         }
         storage.add(object);
@@ -51,9 +51,6 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected Resume doGet(Integer key) {
-        if (key < 0) {
-            throw new IllegalArgumentException();
-        }
         return storage.get(key);
     }
 
@@ -69,9 +66,11 @@ public class ListStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doDelete(Integer key) {
-        if (key < 0) {
-            throw new IllegalArgumentException();
-        }
         storage.remove(key.intValue());
+    }
+
+    @Override
+    protected boolean isExists(Integer key) {
+        return key != null;
     }
 }

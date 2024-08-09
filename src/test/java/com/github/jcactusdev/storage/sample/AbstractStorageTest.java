@@ -1,11 +1,13 @@
 package com.github.jcactusdev.storage.sample;
 
-import com.github.jcactusdev.model.Resume;
+import com.github.jcactusdev.model.*;
 import com.github.jcactusdev.storage.Storage;
+import com.github.jcactusdev.util.DateUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,11 +21,50 @@ public abstract class AbstractStorageTest {
     private static final String UUID_4 = "uuid4";
     private static final String UUID_5 = "uuid5";
 
-    private static final Resume R1 = new Resume(UUID_1, "Name1");
-    private static final Resume R2 = new Resume(UUID_2, "Name2");
-    private static final Resume R3 = new Resume(UUID_3, "Name3");
-    private static final Resume R4 = new Resume(UUID_4, "Name4");
-    private static final Resume R5 = new Resume(UUID_5, "Name5");
+    private static final Resume R1;
+    private static final Resume R2;
+    private static final Resume R3;
+    private static final Resume R4;
+    private static final Resume R5;
+
+    static {
+        R1 = new Resume(UUID_1, "Name1");
+        R1.addContact(ContactType.MAIL, "ru-j-cactus@gmail.com");
+        R1.addContact(ContactType.MOBILE, "+7(932) 319-78-60");
+        R1.addContact(ContactType.GITHUB, "JCactusDev");
+
+        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+        R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
+        R1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achiv11", "Achiv12", "Achiv13"));
+        R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "Sql", "html"));
+        R1.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organization("OOO Accent", "HTTP page",
+                        new Organization.Position(2023, Month.JANUARY,  "1C engineer", "content 1")
+                ),
+                new Organization("OOO IT-Link", "HTTP page",
+                        new Organization.Position(2022, Month.AUGUST, 2022, Month.DECEMBER, "1C consultant/QA", "content 2")
+                )
+        ));
+        R1.addSection(SectionType.EDUCATION, new OrganizationSection(
+                new Organization("Institute", null,
+                        new Organization.Position(2015, Month.AUGUST, 2020, Month.AUGUST, "Economist", "content 3")
+                )
+        ));
+
+        R2 = new Resume(UUID_2, "Name2");
+        R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
+        R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
+        R2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+                new Organization("OOO Two", "HTTP page",
+                        new Organization.Position(2022, Month.JANUARY, "Engineer", "content 1"),
+                        new Organization.Position(2015, Month.AUGUST, 2022, Month.DECEMBER, "QA", "content 2")
+                )
+        ));
+
+        R3 = new Resume(UUID_3, "Name3");
+        R4 = new Resume(UUID_4, "Name4");
+        R5 = new Resume(UUID_5, "Name5");
+    }
 
     protected AbstractStorageTest(Storage storage) {
         this.storage = storage;

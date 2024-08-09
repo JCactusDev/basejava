@@ -38,9 +38,6 @@ public class MapWithKeyResumeStorage extends AbstractStorage<Resume> {
 
     @Override
     protected void doSave(Resume object, Resume key) {
-        if (storage.containsValue(key)) {
-            throw new IllegalArgumentException();
-        }
         storage.put(object.getUUID(), object);
     }
 
@@ -62,5 +59,10 @@ public class MapWithKeyResumeStorage extends AbstractStorage<Resume> {
     @Override
     protected void doDelete(Resume key) {
         storage.remove(key.getUUID());
+    }
+
+    @Override
+    protected boolean isExists(Resume key) {
+        return key != null;
     }
 }

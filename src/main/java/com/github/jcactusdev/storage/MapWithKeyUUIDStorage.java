@@ -38,9 +38,6 @@ public class MapWithKeyUUIDStorage extends AbstractStorage<String> {
 
     @Override
     protected void doSave(Resume object, String uuid) {
-        if (storage.containsKey(uuid)) {
-            throw new IllegalArgumentException();
-        }
         storage.put(uuid, object);
     }
 
@@ -62,5 +59,10 @@ public class MapWithKeyUUIDStorage extends AbstractStorage<String> {
     @Override
     protected void doDelete(String uuid) {
         storage.remove(uuid);
+    }
+
+    @Override
+    protected boolean isExists(String key) {
+        return storage.containsKey(key);
     }
 }

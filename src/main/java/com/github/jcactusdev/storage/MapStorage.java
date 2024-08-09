@@ -38,9 +38,6 @@ public class MapStorage extends AbstractStorage<String> {
 
     @Override
     protected void doSave(Resume object, String key) {
-        if (storage.containsKey(key)) {
-            throw new IllegalArgumentException();
-        }
         storage.put(key, object);
     }
 
@@ -62,5 +59,10 @@ public class MapStorage extends AbstractStorage<String> {
     @Override
     protected void doDelete(String key) {
         storage.remove(key);
+    }
+
+    @Override
+    protected boolean isExists(String key) {
+        return storage.containsKey(key);
     }
 }

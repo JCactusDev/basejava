@@ -18,4 +18,5 @@ public interface Storage {
     void clear();
 
     int size();
+
 }

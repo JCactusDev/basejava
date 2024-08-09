@@ -52,6 +52,14 @@ public class Resume implements Comparable<Resume> {
         return sections.get(type);
     }
 
+    public void addContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void addSection(SectionType type, Section value) {
+        sections.put(type, value);
+    }
+
     @Override
     public String toString() {
         return String.format("Resume [uuid=%s, fullName=%s]", uuid, fullName);
@@ -80,8 +88,8 @@ public class Resume implements Comparable<Resume> {
         // Приведение otherObject к типу текущего класа
         Resume other = (Resume) otherObject;
         // Проверка хранимых значений в свойствах объекта
-        return Objects.equals(this.uuid, other.uuid)
-                && Objects.equals(this.fullName, other.fullName);
+        return Objects.equals(uuid, other.uuid)
+                && Objects.equals(fullName, other.fullName);
     }
 
     @Override

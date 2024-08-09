@@ -24,9 +24,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doSave(Resume object, Integer key) {
-        if (key >= 0) {
-            throw new IllegalArgumentException();
-        }
         if (size + 1 > STORAGE_LIMIT) {
             throw new ArrayIndexOutOfBoundsException("Resume limit exceeded");
         }
@@ -36,9 +33,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected Resume doGet(Integer key) {
-        if (key < 0) {
-            throw new IllegalArgumentException();
-        }
         return storage[key];
     }
 
@@ -49,20 +43,19 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     @Override
     protected void doUpdate(Resume object, Integer key) {
-        if (key < 0) {
-            throw new IllegalArgumentException();
-        }
         storage[key] = object;
     }
 
     @Override
     protected void doDelete(Integer key) {
-        if (key < 0) {
-            throw new IllegalArgumentException();
-        }
         removeElement(key);
         storage[size - 1] = null;
         size--;
+    }
+
+    @Override
+    protected boolean isExists(Integer key) {
+        return key >= 0;
     }
 
     protected abstract void insertElement(Resume object, Integer key);
