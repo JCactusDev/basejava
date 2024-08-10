@@ -10,7 +10,6 @@ public class Main {
     private static final Storage storage = new ArrayStorage();
     private static final Storage sort_storage = new SortedArrayStorage();
     private static final Storage list_storage = new ListStorage();
-    private static final Storage map_storage = new MapStorage();
     private static final Storage mapWithUUID_storage = new MapWithKeyUUIDStorage();
     private static final Storage mapWithResume_storage = new MapWithKeyResumeStorage();
 
@@ -73,24 +72,6 @@ public class Main {
         System.out.println("clear:");
         list_storage.clear();
         System.out.println("Total size: " + list_storage.size() + ", size() == getAll(): " + (list_storage.size() == list_storage.getAllSorted().size()));
-
-        System.out.println("============================================");
-
-        System.out.println("MapStorage:");
-        map_storage.save(resume3);
-        map_storage.save(resume2);
-        map_storage.save(resume1);
-        System.out.println(map_storage.toString());
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == map_storage.getAllSorted().size()));
-
-        System.out.println("delete \"UUID_2\":");
-        map_storage.delete("UUID_2");
-        System.out.println(map_storage.toString());
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == map_storage.getAllSorted().size()));
-
-        System.out.println("clear:");
-        map_storage.clear();
-        System.out.println("Total size: " + map_storage.size() + ", size() == getAll(): " + (map_storage.size() == map_storage.getAllSorted().size()));
 
         System.out.println("============================================");
 

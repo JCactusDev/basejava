@@ -12,12 +12,12 @@ public abstract class AbstractStorage<K> implements Storage {
 
     @Override
     public void save(Resume object) {
-    LOG.info(String.format("Save: %s", object.toString()));
+        LOG.info(String.format("Save: %s", object.toString()));
         if (object == null) {
             throw new NullPointerException();
         }
         K key = getKey(object.getUUID());
-        if(isExists(key)){
+        if (isExists(key)) {
             throw new IllegalArgumentException();
         }
         doSave(object, key);
@@ -30,7 +30,7 @@ public abstract class AbstractStorage<K> implements Storage {
             throw new NullPointerException();
         }
         K key = getKey(uuid);
-        if(!isExists(key)){
+        if (!isExists(key)) {
             throw new NullPointerException();
         }
         return doGet(key);
@@ -51,7 +51,7 @@ public abstract class AbstractStorage<K> implements Storage {
             throw new NullPointerException();
         }
         K key = getKey(object.getUUID());
-        if(!isExists(key)){
+        if (!isExists(key)) {
             throw new NullPointerException();
         }
         doUpdate(object, key);
@@ -64,7 +64,7 @@ public abstract class AbstractStorage<K> implements Storage {
             throw new NullPointerException();
         }
         K key = getKey(uuid);
-        if(!isExists(key)){
+        if (!isExists(key)) {
             throw new NullPointerException();
         }
         doDelete(key);

@@ -1,19 +1,21 @@
 package com.github.jcactusdev.storage;
 
 import com.github.jcactusdev.model.Resume;
+import com.github.jcactusdev.storage.serializer.StreamSerializer;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public abstract class AbstractFileStorage extends AbstractStorage<File> {
+public class FileStorage extends AbstractStorage<File> {
 
     private File directory;
+    private StreamSerializer streamSerializer;
 
-    protected AbstractFileStorage(File directory) {
+    public FileStorage(File directory, StreamSerializer streamSerializer) {
         Objects.requireNonNull(directory, "Directory must not be null");
+        Objects.requireNonNull(streamSerializer, "StreamSerializer must not be null");
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(String.format("%s - is not directory", directory.getAbsolutePath()));
         }
@@ -21,6 +23,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
             throw new IllegalArgumentException(String.format("%s - is not readable/writable", directory.getAbsolutePath()));
         }
         this.directory = directory;
+        this.streamSerializer = streamSerializer;
     }
 
     @Override
@@ -66,7 +69,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File key) {
         try {
-            return doRead(key);
+            return streamSerializer.doRead(new BufferedInputStream(new FileInputStream(key)));
         } catch (IOException e) {
             throw new RuntimeException("File read error", e);
         }
@@ -88,7 +91,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Resume object, File key) {
         try {
-            doWrite(object, key);
+            streamSerializer.doWrite(object, new BufferedOutputStream(new FileOutputStream(key)));
         } catch (IOException e) {
             throw new RuntimeException("File write error", e);
         }
@@ -105,9 +108,5 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected boolean isExists(File key) {
         return key.exists();
     }
-
-    protected abstract void doWrite(Resume object, File key) throws IOException;
-
-    protected abstract Resume doRead(File key) throws IOException;
 
 }

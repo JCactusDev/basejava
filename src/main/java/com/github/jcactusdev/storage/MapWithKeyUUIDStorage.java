@@ -24,7 +24,7 @@ public class MapWithKeyUUIDStorage extends AbstractStorage<String> {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (Map.Entry<String, Resume> entry : storage.entrySet()){
+        for (Map.Entry<String, Resume> entry : storage.entrySet()) {
             stringBuilder.append(String.format("Key: %s, Resume: %s\n", entry.getKey(), entry.getValue()));
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
