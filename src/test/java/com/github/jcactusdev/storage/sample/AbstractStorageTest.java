@@ -57,9 +57,9 @@ public abstract class AbstractStorageTest {
         R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
         R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
         R2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
-                new Organization("OOO Two", "HTTP page",
+                new Organization("OOO Two", null,
                         new Organization.Position(2022, Month.JANUARY, "Engineer", "content 1"),
-                        new Organization.Position(2015, Month.AUGUST, 2022, Month.DECEMBER, "QA", "content 2")
+                        new Organization.Position(2015, Month.AUGUST, 2022, Month.DECEMBER, "QA", null)
                 )
         ));
 
@@ -84,7 +84,7 @@ public abstract class AbstractStorageTest {
     public void save() throws Exception {
         storage.save(R4);
         Assert.assertEquals(4, storage.size());
-        Assert.assertEquals(R4, storage.get(UUID_4));
+        Assert.assertEquals(R4, storage.get(R4.getUUID()));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -93,8 +93,9 @@ public abstract class AbstractStorageTest {
         storage.save(R5);
     }
 
+    @Test
     public void get() throws Exception {
-        Assert.assertEquals(R1, storage.get(UUID_1));
+        Assert.assertEquals(R1, storage.get(R1.getUUID()));
     }
 
     @Test
@@ -104,12 +105,14 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(list, Arrays.asList(R1, R2, R3));
     }
 
+    @Test
     public void update() throws Exception {
-        Resume newResume = new Resume(UUID_1);
+        Resume newResume = new Resume(UUID_1, "Name1");
         storage.update(newResume);
-        Assert.assertEquals(newResume, storage.get(UUID_1));
+        Assert.assertEquals(newResume, storage.get(R1.getUUID()));
     }
 
+    @Test
     public void delete() throws Exception {
         storage.delete(UUID_2);
         Assert.assertEquals(2, storage.size());

@@ -9,7 +9,9 @@ public class ListSection extends Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final List<String> items;
+    private List<String> items;
+
+    public ListSection() {}
 
     public ListSection(String... items) {
         this(Arrays.asList(items));

@@ -13,6 +13,9 @@ import org.junit.runners.Suite;
         MapWithKeyUUIDStorageTest.class,
         MapWithKeyResumeStorageTest.class,
         ObjectFileStorageTest.class,
-        ObjectPathStorageTest.class
+        ObjectPathStorageTest.class,
+        XmlPathStorageTest.class,
+        JsonPathStorageTest.class,
+        DataPathStorageTest.class
 })
 public class MainStorageTest {}

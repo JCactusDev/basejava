@@ -1,5 +1,8 @@
 package com.github.jcactusdev.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +12,9 @@ public class OrganizationSection extends Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final List<Organization> organizations;
+    private List<Organization> organizations;
+
+    public OrganizationSection() {}
 
     public OrganizationSection(Organization... organizations) {
         this(Arrays.asList(organizations));

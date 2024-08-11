@@ -27,9 +27,6 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected Integer getKey(String uuid) {
-        if (uuid == null) {
-            throw new IllegalArgumentException();
-        }
         for (int i = 0; i < size; i++) {
             if (storage[i].getUUID().equals(uuid)) {
                 return i;

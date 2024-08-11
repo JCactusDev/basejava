@@ -1,11 +1,17 @@
 package com.github.jcactusdev.model;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resume implements Comparable<Resume>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,8 +53,16 @@ public class Resume implements Comparable<Resume>, Serializable {
         this.fullName = fullName;
     }
 
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
     public String getContact(ContactType type) {
         return contacts.get(type);
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 
     public Section getSection(SectionType type) {
@@ -71,7 +85,9 @@ public class Resume implements Comparable<Resume>, Serializable {
     @Override
     public int hashCode() {
         return 31 * ((uuid == null) ? 0 : uuid.hashCode())
-                + 31 * ((fullName == null) ? 0 : fullName.hashCode());
+                + 31 * ((fullName == null) ? 0 : fullName.hashCode())
+                + 31 * ((contacts == null) ? 0 : contacts.hashCode())
+                + 31 * ((sections == null) ? 0 : sections.hashCode());
     }
 
     @Override
@@ -92,7 +108,9 @@ public class Resume implements Comparable<Resume>, Serializable {
         Resume other = (Resume) otherObject;
         // Проверка хранимых значений в свойствах объекта
         return Objects.equals(uuid, other.uuid)
-                && Objects.equals(fullName, other.fullName);
+                && Objects.equals(fullName, other.fullName)
+                && Objects.equals(contacts, other.contacts)
+                && Objects.equals(sections, other.sections);
     }
 
     @Override
@@ -105,6 +123,8 @@ public class Resume implements Comparable<Resume>, Serializable {
         }
         cloneObject.uuid = uuid;
         cloneObject.fullName = fullName;
+        cloneObject.contacts.putAll(contacts);
+        cloneObject.sections.putAll(sections);
         return cloneObject;
     }
 

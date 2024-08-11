@@ -31,7 +31,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(uuid);
         if (!isExists(key)) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         return doGet(key);
     }
@@ -52,7 +52,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(object.getUUID());
         if (!isExists(key)) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         doUpdate(object, key);
     }
@@ -65,7 +65,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(uuid);
         if (!isExists(key)) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException();
         }
         doDelete(key);
     }
