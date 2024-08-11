@@ -2,7 +2,7 @@ package com.github.jcactusdev;
 
 public class LazySingleton {
 
-    private static class LazySingletonHolder{
+    private static class LazySingletonHolder {
         private static final LazySingleton INSTANCE = new LazySingleton();
     }
 
