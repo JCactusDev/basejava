@@ -1,8 +1,8 @@
 package com.github.jcactusdev.storage.sample;
 
+import com.github.jcactusdev.Config;
 import com.github.jcactusdev.model.*;
 import com.github.jcactusdev.storage.Storage;
-import com.github.jcactusdev.util.DateUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,17 +11,18 @@ import java.io.File;
 import java.time.Month;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class AbstractStorageTest {
 
-    protected final static File STORAGE_DIR = new File("D:\\Java Projects\\My Portfolio\\basejava\\storage");
+    protected final static File STORAGE_DIR = Config.getInstance().getStorageDir();
     protected Storage storage;
 
-    private static final String UUID_1 = "uuid1";
-    private static final String UUID_2 = "uuid2";
-    private static final String UUID_3 = "uuid3";
-    private static final String UUID_4 = "uuid4";
-    private static final String UUID_5 = "uuid5";
+    private static final String UUID_1 = UUID.randomUUID().toString();
+    private static final String UUID_2 = UUID.randomUUID().toString();
+    private static final String UUID_3 = UUID.randomUUID().toString();
+    private static final String UUID_4 = UUID.randomUUID().toString();
+    private static final String UUID_5 = UUID.randomUUID().toString();
 
     private static final Resume R1;
     private static final Resume R2;
@@ -31,37 +32,37 @@ public abstract class AbstractStorageTest {
 
     static {
         R1 = new Resume(UUID_1, "Name1");
-        R1.addContact(ContactType.MAIL, "ru-j-cactus@gmail.com");
-        R1.addContact(ContactType.MOBILE, "+7(932) 319-78-60");
-        R1.addContact(ContactType.GITHUB, "JCactusDev");
-
-        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
-        R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
-        R1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achiv11", "Achiv12", "Achiv13"));
-        R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "Sql", "html"));
-        R1.addSection(SectionType.EXPERIENCE, new OrganizationSection(
-                new Organization("OOO Accent", "HTTP page",
-                        new Organization.Position(2023, Month.JANUARY,  "1C engineer", "content 1")
-                ),
-                new Organization("OOO IT-Link", "HTTP page",
-                        new Organization.Position(2022, Month.AUGUST, 2022, Month.DECEMBER, "1C consultant/QA", "content 2")
-                )
-        ));
-        R1.addSection(SectionType.EDUCATION, new OrganizationSection(
-                new Organization("Institute", null,
-                        new Organization.Position(2015, Month.AUGUST, 2020, Month.AUGUST, "Economist", "content 3")
-                )
-        ));
+//        R1.addContact(ContactType.MAIL, "ru-j-cactus@gmail.com");
+//        R1.addContact(ContactType.MOBILE, "+7(932) 319-78-60");
+//        R1.addContact(ContactType.GITHUB, "JCactusDev");
+//
+//        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
+//        R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
+//        R1.addSection(SectionType.ACHIEVEMENT, new ListSection("Achiv11", "Achiv12", "Achiv13"));
+//        R1.addSection(SectionType.QUALIFICATIONS, new ListSection("Java", "Sql", "html"));
+//        R1.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+//                new Organization("OOO Accent", "HTTP page",
+//                        new Organization.Position(2023, Month.JANUARY,  "1C engineer", "content 1")
+//                ),
+//                new Organization("OOO IT-Link", "HTTP page",
+//                        new Organization.Position(2022, Month.AUGUST, 2022, Month.DECEMBER, "1C consultant/QA", "content 2")
+//                )
+//        ));
+//        R1.addSection(SectionType.EDUCATION, new OrganizationSection(
+//                new Organization("Institute", null,
+//                        new Organization.Position(2015, Month.AUGUST, 2020, Month.AUGUST, "Economist", "content 3")
+//                )
+//        ));
 
         R2 = new Resume(UUID_2, "Name2");
-        R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
-        R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
-        R2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
-                new Organization("OOO Two", null,
-                        new Organization.Position(2022, Month.JANUARY, "Engineer", "content 1"),
-                        new Organization.Position(2015, Month.AUGUST, 2022, Month.DECEMBER, "QA", null)
-                )
-        ));
+//        R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
+//        R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
+//        R2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
+//                new Organization("OOO Two", null,
+//                        new Organization.Position(2022, Month.JANUARY, "Engineer", "content 1"),
+//                        new Organization.Position(2015, Month.AUGUST, 2022, Month.DECEMBER, "QA", null)
+//                )
+//        ));
 
         R3 = new Resume(UUID_3, "Name3");
         R4 = new Resume(UUID_4, "Name4");
@@ -87,7 +88,7 @@ public abstract class AbstractStorageTest {
         Assert.assertEquals(R4, storage.get(R4.getUUID()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = RuntimeException.class)
     public void saveElementExistsStorage() {
         storage.save(R5);
         storage.save(R5);

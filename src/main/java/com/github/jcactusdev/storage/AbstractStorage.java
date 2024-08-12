@@ -18,7 +18,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(object.getUUID());
         if (isExists(key)) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException("Key already exists");
         }
         doSave(object, key);
     }
@@ -31,7 +31,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(uuid);
         if (!isExists(key)) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException("Key does not exist");
         }
         return doGet(key);
     }
@@ -52,7 +52,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(object.getUUID());
         if (!isExists(key)) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException("Key does not exist");
         }
         doUpdate(object, key);
     }
@@ -65,7 +65,7 @@ public abstract class AbstractStorage<K> implements Storage {
         }
         K key = getKey(uuid);
         if (!isExists(key)) {
-            throw new IllegalArgumentException();
+            throw new RuntimeException("Key does not exist");
         }
         doDelete(key);
     }
