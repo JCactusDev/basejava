@@ -60,6 +60,9 @@ public class Resume implements Comparable<Resume>, Serializable {
     public String getContact(ContactType type) {
         return contacts.get(type);
     }
+    public void setContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
 
     public Map<SectionType, Section> getSections() {
         return sections;
@@ -79,7 +82,7 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     @Override
     public String toString() {
-        return String.format("Resume [uuid=%s, fullName=%s]", uuid, fullName);
+        return String.format("Resume [uuid=%s, fullName=%s, contacts=%s, sections=%s]", uuid, fullName, contacts, sections);
     }
 
     @Override

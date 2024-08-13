@@ -32,9 +32,9 @@ public abstract class AbstractStorageTest {
 
     static {
         R1 = new Resume(UUID_1, "Name1");
-//        R1.addContact(ContactType.MAIL, "ru-j-cactus@gmail.com");
-//        R1.addContact(ContactType.MOBILE, "+7(932) 319-78-60");
-//        R1.addContact(ContactType.GITHUB, "JCactusDev");
+        R1.addContact(ContactType.MAIL, "ru-j-cactus@gmail.com");
+        R1.addContact(ContactType.MOBILE, "+7(932) 319-78-60");
+        R1.addContact(ContactType.GITHUB, "JCactusDev");
 //
 //        R1.addSection(SectionType.OBJECTIVE, new TextSection("Objective1"));
 //        R1.addSection(SectionType.PERSONAL, new TextSection("Personal data"));
@@ -55,8 +55,8 @@ public abstract class AbstractStorageTest {
 //        ));
 
         R2 = new Resume(UUID_2, "Name2");
-//        R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
-//        R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
+        R2.addContact(ContactType.MAIL, "qwe@gmail.ru");
+        R2.addContact(ContactType.MOBILE, "+8(800) 555-35-35");
 //        R2.addSection(SectionType.EXPERIENCE, new OrganizationSection(
 //                new Organization("OOO Two", null,
 //                        new Organization.Position(2022, Month.JANUARY, "Engineer", "content 1"),
@@ -109,6 +109,8 @@ public abstract class AbstractStorageTest {
     @Test
     public void update() throws Exception {
         Resume newResume = new Resume(UUID_1, "Name1");
+        newResume.addContact(ContactType.MAIL, "ru-j-cactus@gmail.RU");
+        newResume.addContact(ContactType.MOBILE, "+7(932) 319-78-10");
         storage.update(newResume);
         Assert.assertEquals(newResume, storage.get(R1.getUUID()));
     }
