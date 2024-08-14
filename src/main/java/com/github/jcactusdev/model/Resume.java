@@ -16,6 +16,17 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final Resume EMPTY = new Resume();
+
+    static {
+        EMPTY.setSection(SectionType.OBJECTIVE, TextSection.EMPTY);
+        EMPTY.setSection(SectionType.PERSONAL, TextSection.EMPTY);
+        EMPTY.setSection(SectionType.ACHIEVEMENT, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.QUALIFICATIONS, ListSection.EMPTY);
+        EMPTY.setSection(SectionType.EXPERIENCE, new OrganizationSection(Organization.EMPTY));
+        EMPTY.setSection(SectionType.EDUCATION, new OrganizationSection(Organization.EMPTY));
+    }
+
     // Unique identifier
     private String uuid;
     private String fullName;
@@ -24,12 +35,11 @@ public class Resume implements Comparable<Resume>, Serializable {
     private final Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume() {
+        this(UUID.randomUUID().toString(), "");
     }
-
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
     }
-
     public Resume(String uuid, String fullName) {
         Objects.requireNonNull(uuid, "uuid must not be null");
         Objects.requireNonNull(fullName, "fullName must not be null");
@@ -37,10 +47,9 @@ public class Resume implements Comparable<Resume>, Serializable {
         this.fullName = fullName;
     }
 
-    public String getUUID() {
+    public String getUuid() {
         return uuid;
     }
-
     public void setUUID(String uuid) {
         this.uuid = uuid;
     }
@@ -48,7 +57,6 @@ public class Resume implements Comparable<Resume>, Serializable {
     public String getFullName() {
         return fullName;
     }
-
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
@@ -56,26 +64,25 @@ public class Resume implements Comparable<Resume>, Serializable {
     public Map<ContactType, String> getContacts() {
         return contacts;
     }
-
     public String getContact(ContactType type) {
         return contacts.get(type);
     }
     public void setContact(ContactType type, String value) {
         contacts.put(type, value);
     }
-
-    public Map<SectionType, Section> getSections() {
-        return sections;
-    }
-
-    public Section getSection(SectionType type) {
-        return sections.get(type);
-    }
-
     public void addContact(ContactType type, String value) {
         contacts.put(type, value);
     }
 
+    public Map<SectionType, Section> getSections() {
+        return sections;
+    }
+    public Section getSection(SectionType type) {
+        return sections.get(type);
+    }
+    public void setSection(SectionType type, Section value) {
+        sections.put(type, value);
+    }
     public void addSection(SectionType type, Section value) {
         sections.put(type, value);
     }

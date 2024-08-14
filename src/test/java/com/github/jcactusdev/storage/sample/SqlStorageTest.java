@@ -1,7 +1,6 @@
 package com.github.jcactusdev.storage.sample;
 
 import com.github.jcactusdev.Config;
-import com.github.jcactusdev.storage.ListStorage;
 import com.github.jcactusdev.storage.SqlStorage;
 
 import java.io.File;

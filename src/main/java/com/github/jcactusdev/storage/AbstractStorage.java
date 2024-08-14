@@ -16,7 +16,7 @@ public abstract class AbstractStorage<K> implements Storage {
         if (object == null) {
             throw new NullPointerException();
         }
-        K key = getKey(object.getUUID());
+        K key = getKey(object.getUuid());
         if (isExists(key)) {
             throw new RuntimeException("Key already exists");
         }
@@ -50,7 +50,7 @@ public abstract class AbstractStorage<K> implements Storage {
         if (object == null) {
             throw new NullPointerException();
         }
-        K key = getKey(object.getUUID());
+        K key = getKey(object.getUuid());
         if (!isExists(key)) {
             throw new RuntimeException("Key does not exist");
         }

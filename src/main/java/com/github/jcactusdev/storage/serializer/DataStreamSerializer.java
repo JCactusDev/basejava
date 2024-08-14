@@ -14,7 +14,7 @@ public class DataStreamSerializer implements StreamSerializer {
     @Override
     public void doWrite(Resume object, OutputStream key) throws IOException {
         try (DataOutputStream out = new DataOutputStream(key)) {
-            out.writeUTF(object.getUUID());
+            out.writeUTF(object.getUuid());
             out.writeUTF(object.getFullName());
             Map<ContactType, String> contacts = object.getContacts();
             writeItems(out, contacts.entrySet(), entry -> {

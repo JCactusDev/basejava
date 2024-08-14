@@ -9,6 +9,8 @@ public class ListSection extends Section implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    public static final ListSection EMPTY = new ListSection("");
+
     private List<String> items;
 
     public ListSection() {}
